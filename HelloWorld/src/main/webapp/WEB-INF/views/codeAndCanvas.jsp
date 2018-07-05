@@ -36,14 +36,13 @@
             data : _update,
             dataType:"json",
             success : function(data) {
-              var tt = data.result;	
-              var a = JSON.stringify(tt);
+             var json = data;
+             console.log("data받아옴"+json);
              
-             var param = data.param;
-             alert(parma);
-             
-              //var vvv = a.name;
-            //  alert(vvv);
+             console.log(Object.keys(json.line).length);
+             for(var i = 0; i < Object.keys(json.line).length; i++){
+            	 console.log((i+1)+"번 라인"+json.line[(i+1)+"line"]);
+             }
             },
             error : function(e) {
                console.log('error:' + e.status + '..힝')

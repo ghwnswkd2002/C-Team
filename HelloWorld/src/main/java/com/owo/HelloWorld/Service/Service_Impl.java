@@ -15,15 +15,15 @@ public class Service_Impl implements MainService{
 	CodeBuffer codebuffer;
 	
 	@Override
-	public HashMap<Integer, String> splitCode(String text) {
+	public HashMap<String, String> splitCode(String text) {
 	    System.out.println("서비스부분"+text);
-	    HashMap<Integer, String> res = new HashMap<Integer, String>();
+	    HashMap<String, String> res = new HashMap<String, String>();
 	   res = codebuffer.splitCode(text);
 		return res;
 	}
 
 	@Override
-	public HashMap<Integer, String> methodSplit(HashMap<Integer, String> sc) {
+	public HashMap<String, String> methodSplit(HashMap<String, String> sc) {
 		return codebuffer.methodSplit(sc);
 	}
 
@@ -34,7 +34,7 @@ public class Service_Impl implements MainService{
 	}
 
 	@Override
-	public CoreBuffer allRead(HashMap<Integer, String> hashmap) {
+	public CoreBuffer allRead(HashMap<String, String> hashmap) {
 		return codebuffer.allRead(hashmap);
 		
 	}

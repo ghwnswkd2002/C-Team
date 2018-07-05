@@ -21,14 +21,14 @@ public class CodeBuffer {
 	CoreBuffer corebuffer = new CoreBuffer();
 	
 	
-	public HashMap<Integer, String> splitCode(String text) {
-	    HashMap<Integer, String> res = new HashMap<Integer, String>();
+	public HashMap<String, String> splitCode(String text) {
+	    HashMap<String, String> res = new HashMap<String, String>();
 		System.out.println("split 들어옴");
 		if(text != null) { 								//텍스트 널 아니면
 			String[] sp = text.split("\n"); 			// 자르셈
 			for(int i = 0; i < sp.length; i++) { 		//포문돌림
-				res.put((i+1), sp[i]); 					//res해쉬맵에 넣어
-				System.out.println(res.get(i+1)); 		//찍어
+				res.put((i+1)+"line", sp[i]); 					//res해쉬맵에 넣어
+				System.out.println(res.get((i+1)+"line")); 		//찍어
 			}
 			return res; 								//컨트롤러에서 불렀잖; ;;리턴해
 		}
@@ -38,9 +38,9 @@ public class CodeBuffer {
 
 
 
-	public HashMap<Integer, String>  methodSplit(HashMap<Integer, String> sc){ //메소드 잘라서 붙이는거임
+	public HashMap<String, String>  methodSplit(HashMap<String, String> sc){ //메소드 잘라서 붙이는거임
 
-		HashMap<Integer, String> res = new HashMap<Integer, String>();	//해쉬맵임
+		HashMap<String, String> res = new HashMap<String, String>();	//해쉬맵임
 		ArrayList list = new ArrayList();								//라인 나눈거 받은거 get한거 넣은 리스트임
 		String result; 										//결과값임
 		ArrayList<Integer> start = new ArrayList<Integer>(); 			//시작라인 어레이리스트임
@@ -53,26 +53,26 @@ public class CodeBuffer {
 		int endcbcnt = 0;									//닫는 중괄호 } 카운트
 		
 		for(int i=0; i<sc.size(); i++) { 								//돌려돌려 for문판!
-			if(sc.get(i+1).contains("{")) {
+			if(sc.get((i+1)+"line").contains("{")) {
 				startcbcnt++;
 			}
-			if(sc.get(i+1).contains("}")) {
+			if(sc.get((i+1)+"line").contains("}")) {
 				endcbcnt++;
 			}
 			
-			if((startcbcnt-endcbcnt)==1&&sc.get(i+1).contains("(")&&!sc.get(i+1).contains(";")) { //만약에~말야~
+			if((startcbcnt-endcbcnt)==1&&sc.get((i+1)+"line").contains("(")&&!sc.get((i+1)+"line").contains(";")) { //만약에~말야~
 				System.out.println("시작라인 확인"); 						//찍어봄 함
 				start.add(i+1); 										//스타트 넣어줌
-				list.add(sc.get(i+1)); 									//리스트에 넣어 if문에 걸리는거
+				list.add(sc.get((i+1)+"line")); 									//리스트에 넣어 if문에 걸리는거
 				System.out.println("시작라인"+list.get(Toindex)+"라인번호 = "+start.get(Sindex)); //찍어�R다
 				Sindex++; 												//증
 				Toindex++; 												//가
 			}
-			if((startcbcnt==endcbcnt)&&sc.get(i+1).contains("}")) { 							//끝찾기
+			if((startcbcnt==endcbcnt)&&sc.get((i+1)+"line").contains("}")) { 							//끝찾기
 
 				System.out.println("끝라인 체크");
 				end.add(i+1); 											//end 리스트에 넣음
-				list.add(sc.get(i+1)); 									// 끝라인 넣음
+				list.add(sc.get((i+1)+"line")); 									// 끝라인 넣음
 				System.out.println("끝라인"+list.get(Toindex) + "라인번호 = " +end.get(Eindex));
 				Eindex++; 												//증
 				Toindex++; 												//to the 가
@@ -84,17 +84,19 @@ public class CodeBuffer {
 		for(int ind = 0; ind<end.size(); ind++) { 						//돌려돌려 for문판!
 			result = ""; 												//result값 초기화
 			for(int st=start.get(ind); st<end.get(ind)+1; st++) { 		//함수형식으로 만들기 위해 한번 더 돌림
-				result +=sc.get(st)+"\n";								//라인 존나게 붙여준다
+				result +=sc.get(st+"line")+"\n";								//라인 존나게 붙여준다
 				System.out.println("라인 붙이기 ="+result); 
 			}
-			res.put((ind+1), result); 									//res에 넣어줌
+			res.put((ind+1)+"line", result); 									//res에 넣어줌
 			System.out.println((ind+1)+"번 들어감");
 		}
+		
+		for(int i=0; i<res.size(); i++) {
+		    System.out.println("LineBuffer\n"+(i+1)+"번째 함수"+res.get((i+1)+"line"));		    
+		}
 
-		System.out.println("LineBuffer\n"+res.get(1));
-		System.out.println("LineBuffer\n"+res.get(2));
 		for(int i=0; i<sc.size();i++) { 								//라인확인하려고 돌려봄
-			System.out.println(i+1+"번째 라인 = "+sc.get(i+1));
+			System.out.println(i+1+"번째 라인 = "+sc.get((i+1)+"line"));
 		}
 		return res;
 	}
@@ -114,12 +116,13 @@ public class CodeBuffer {
 		
 	}
 	
-	public CoreBuffer allRead(HashMap<Integer, String> hashmap) {
+	public CoreBuffer allRead(HashMap<String, String> hashmap) {
 		
 		System.out.println("전부읽어들이기");
+		System.out.println(hashmap);
 		
 		for(int i=0;i<hashmap.size();i++) {
-		corebuffer =onelineread(hashmap.get(i));
+		corebuffer =onelineread(hashmap.get((i+1)+"line"));
 		}
 		
 		
