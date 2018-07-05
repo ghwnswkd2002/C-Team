@@ -32,7 +32,7 @@ public class MainController {
 	@RequestMapping("/ajax")
 	@ResponseBody	//requestbody해서 json으로 받은거를 여기서 string으로 형변환
 	public void sendToCanvas(@RequestBody String text,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(text);
+		System.out.println("컨트롤 부분"+text);
 		JSONObject object = new JSONObject();	//json객체 생성
 		
 		//여기서 함수 불러서 처리한다음에 다시 여기로 돌아오게 만들어줌

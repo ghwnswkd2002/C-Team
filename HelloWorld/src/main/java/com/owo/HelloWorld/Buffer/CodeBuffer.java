@@ -3,31 +3,34 @@ package com.owo.HelloWorld.Buffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.stereotype.Repository;
+
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 import com.owo.HelloWorld.Buffer.Enum.ParameterType;
 
+@Repository
 public class CodeBuffer {
 	/* 
-	 * ÄÚ¾î ¹öÆÛ¿¡ ÇÑ²¨¹ø¿¡ ¸ğ¾Æ¼­ °´Ã¼¸¦ Àü´ŞÇÒ ¿¹Á¤ÀÌ±â ¶§¹®¿¡
-	 * ¶óÀÎ ¹öÆÛ±îÁö ÀÖÀ» ÇÊ¿ä°¡ ¾øÀ» ¼öµµ ÀÖ±â¶§¹®
-	 * ¿©±â·Î ÄÚµå ÀüºÎ¸¦ ¸ğ¾Æ¼­ ¹Ù·Î core·Î º¸³»´Â ÇÔ¼ö¸¦ ÀüºÎ ¸¸µç´Ù.
-	 * lineº°·Î ½ºÇÃ¸´ÇÑ ÇØ½Ã¸ÊÀ» ¶óÀÎ¼ö´ë·Î Â÷·ÊÂ÷·Ê°Ë»çÇÏ¸é¼­
-	 * corebuffer¿¡ ÀÖ´Â ÇØ½Ã¸Ê¿¡ ´Ù½Ã ´ã¾ÆÁÖ´Â ÀÛ¾÷À» ½Ç½ÃÇÑ´Ù.
+	 * ì½”ì–´ ë²„í¼ì— í•œêº¼ë²ˆì— ëª¨ì•„ì„œ ê°ì²´ë¥¼ ì „ë‹¬í•  ì˜ˆì •ì´ê¸° ë•Œë¬¸ì—
+	 * ë¼ì¸ ë²„í¼ê¹Œì§€ ìˆì„ í•„ìš”ê°€ ì—†ì„ ìˆ˜ë„ ìˆê¸°ë•Œë¬¸
+	 * ì—¬ê¸°ë¡œ ì½”ë“œ ì „ë¶€ë¥¼ ëª¨ì•„ì„œ ë°”ë¡œ coreë¡œ ë³´ë‚´ëŠ” í•¨ìˆ˜ë¥¼ ì „ë¶€ ë§Œë“ ë‹¤.
+	 * lineë³„ë¡œ ìŠ¤í”Œë¦¿í•œ í•´ì‹œë§µì„ ë¼ì¸ìˆ˜ëŒ€ë¡œ ì°¨ë¡€ì°¨ë¡€ê²€ì‚¬í•˜ë©´ì„œ
+	 * corebufferì— ìˆëŠ” í•´ì‹œë§µì— ë‹¤ì‹œ ë‹´ì•„ì£¼ëŠ” ì‘ì—…ì„ ì‹¤ì‹œí•œë‹¤.
 	 */
 
 	CoreBuffer corebuffer = new CoreBuffer();
-	HashMap<Integer, String> res = new HashMap<Integer, String>();
 	
 	
 	public HashMap<Integer, String> splitCode(String text) {
-		System.out.println("split µé¾î¿È");
-		if(text != null) { 								//ÅØ½ºÆ® ³Î ¾Æ´Ï¸é
-			String[] sp = text.split("\n"); 			// ÀÚ¸£¼À
-			for(int i = 0; i < sp.length; i++) { 		//Æ÷¹®µ¹¸²
-				res.put((i+1), sp[i]); 					//resÇØ½¬¸Ê¿¡ ³Ö¾î
-				System.out.println(res.get(i+1)); 		//Âï¾î
+	    HashMap<Integer, String> res = new HashMap<Integer, String>();
+		System.out.println("split ë“¤ì–´ì˜´");
+		if(text != null) { 								//í…ìŠ¤íŠ¸ ë„ ì•„ë‹ˆë©´
+			String[] sp = text.split("\n"); 			// ìë¥´ì…ˆ
+			for(int i = 0; i < sp.length; i++) { 		//í¬ë¬¸ëŒë¦¼
+				res.put((i+1), sp[i]); 					//resí•´ì‰¬ë§µì— ë„£ì–´
+				System.out.println(res.get(i+1)); 		//ì°ì–´
 			}
-			return res; 								//ÄÁÆ®·Ñ·¯¿¡¼­ ºÒ·¶Àİ; ;;¸®ÅÏÇØ
+			return res; 								//ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë¶ˆë €ì–; ;;ë¦¬í„´í•´
 		}
 		return null;
 	}
@@ -35,21 +38,21 @@ public class CodeBuffer {
 
 
 
-	public HashMap<Integer, String>  methodSplit(HashMap<Integer, String> sc){ //¸Ş¼Òµå Àß¶ó¼­ ºÙÀÌ´Â°ÅÀÓ
+	public HashMap<Integer, String>  methodSplit(HashMap<Integer, String> sc){ //ë©”ì†Œë“œ ì˜ë¼ì„œ ë¶™ì´ëŠ”ê±°ì„
 
-		HashMap<Integer, String> res = new HashMap<Integer, String>();	//ÇØ½¬¸ÊÀÓ
-		ArrayList list = new ArrayList();								//¶óÀÎ ³ª´«°Å ¹ŞÀº°Å getÇÑ°Å ³ÖÀº ¸®½ºÆ®ÀÓ
-		String result; 										//°á°ú°ªÀÓ
-		ArrayList<Integer> start = new ArrayList<Integer>(); 			//½ÃÀÛ¶óÀÎ ¾î·¹ÀÌ¸®½ºÆ®ÀÓ
-		ArrayList<Integer> end = new ArrayList<Integer>(); 				//³¡¶óÀÎÀÓ ¤¾¤¾
-		//String[] msd = null; 											//msd¹è¿­ÀÓ null·Î ÃÊ±âÈ­ ¤¾¤¾ ÀÏ´ÜÁÖ¼®
-		int Sindex = 0; 									//½ºÅ¸Æ®ÀÎµ¦½º
-		int Eindex = 0;										//³¡ÀÎµ¦½º
-		int Toindex = 0; 									//ÃÑ ÀÎµ¦½º
-		int startcbcnt = 0;									//¿©´Â Áß°ıÈ£ { Ä«¿îÆ®
-		int endcbcnt = 0;									//´İ´Â Áß°ıÈ£ } Ä«¿îÆ®
+		HashMap<Integer, String> res = new HashMap<Integer, String>();	//í•´ì‰¬ë§µì„
+		ArrayList list = new ArrayList();								//ë¼ì¸ ë‚˜ëˆˆê±° ë°›ì€ê±° getí•œê±° ë„£ì€ ë¦¬ìŠ¤íŠ¸ì„
+		String result; 										//ê²°ê³¼ê°’ì„
+		ArrayList<Integer> start = new ArrayList<Integer>(); 			//ì‹œì‘ë¼ì¸ ì–´ë ˆì´ë¦¬ìŠ¤íŠ¸ì„
+		ArrayList<Integer> end = new ArrayList<Integer>(); 				//ëë¼ì¸ì„ ã…ã…
+		//String[] msd = null; 											//msdë°°ì—´ì„ nullë¡œ ì´ˆê¸°í™” ã…ã… ì¼ë‹¨ì£¼ì„
+		int Sindex = 0; 									//ìŠ¤íƒ€íŠ¸ì¸ë±ìŠ¤
+		int Eindex = 0;										//ëì¸ë±ìŠ¤
+		int Toindex = 0; 									//ì´ ì¸ë±ìŠ¤
+		int startcbcnt = 0;									//ì—¬ëŠ” ì¤‘ê´„í˜¸ { ì¹´ìš´íŠ¸
+		int endcbcnt = 0;									//ë‹«ëŠ” ì¤‘ê´„í˜¸ } ì¹´ìš´íŠ¸
 		
-		for(int i=0; i<sc.size(); i++) { 								//µ¹·Áµ¹·Á for¹®ÆÇ!
+		for(int i=0; i<sc.size(); i++) { 								//ëŒë ¤ëŒë ¤ forë¬¸íŒ!
 			if(sc.get(i+1).contains("{")) {
 				startcbcnt++;
 			}
@@ -57,52 +60,52 @@ public class CodeBuffer {
 				endcbcnt++;
 			}
 			
-			if((startcbcnt-endcbcnt)==1&&sc.get(i+1).contains("(")&&!sc.get(i+1).contains(";")) { //¸¸¾à¿¡~¸»¾ß~
-				System.out.println("½ÃÀÛ¶óÀÎ È®ÀÎ"); 						//Âï¾îº½ ÇÔ
-				start.add(i+1); 										//½ºÅ¸Æ® ³Ö¾îÁÜ
-				list.add(sc.get(i+1)); 									//¸®½ºÆ®¿¡ ³Ö¾î if¹®¿¡ °É¸®´Â°Å
-				System.out.println("½ÃÀÛ¶óÀÎ"+list.get(Toindex)+"¶óÀÎ¹øÈ£ = "+start.get(Sindex)); //Âï¾î“R´Ù
-				Sindex++; 												//Áõ
-				Toindex++; 												//°¡
+			if((startcbcnt-endcbcnt)==1&&sc.get(i+1).contains("(")&&!sc.get(i+1).contains(";")) { //ë§Œì•½ì—~ë§ì•¼~
+				System.out.println("ì‹œì‘ë¼ì¸ í™•ì¸"); 						//ì°ì–´ë´„ í•¨
+				start.add(i+1); 										//ìŠ¤íƒ€íŠ¸ ë„£ì–´ì¤Œ
+				list.add(sc.get(i+1)); 									//ë¦¬ìŠ¤íŠ¸ì— ë„£ì–´ ifë¬¸ì— ê±¸ë¦¬ëŠ”ê±°
+				System.out.println("ì‹œì‘ë¼ì¸"+list.get(Toindex)+"ë¼ì¸ë²ˆí˜¸ = "+start.get(Sindex)); //ì°ì–´ï¿½Rë‹¤
+				Sindex++; 												//ì¦
+				Toindex++; 												//ê°€
 			}
-			if((startcbcnt==endcbcnt)&&sc.get(i+1).contains("}")) { 							//³¡Ã£±â
+			if((startcbcnt==endcbcnt)&&sc.get(i+1).contains("}")) { 							//ëì°¾ê¸°
 
-				System.out.println("³¡¶óÀÎ Ã¼Å©");
-				end.add(i+1); 											//end ¸®½ºÆ®¿¡ ³ÖÀ½
-				list.add(sc.get(i+1)); 									// ³¡¶óÀÎ ³ÖÀ½
-				System.out.println("³¡¶óÀÎ"+list.get(Toindex) + "¶óÀÎ¹øÈ£ = " +end.get(Eindex));
-				Eindex++; 												//Áõ
-				Toindex++; 												//to the °¡
+				System.out.println("ëë¼ì¸ ì²´í¬");
+				end.add(i+1); 											//end ë¦¬ìŠ¤íŠ¸ì— ë„£ìŒ
+				list.add(sc.get(i+1)); 									// ëë¼ì¸ ë„£ìŒ
+				System.out.println("ëë¼ì¸"+list.get(Toindex) + "ë¼ì¸ë²ˆí˜¸ = " +end.get(Eindex));
+				Eindex++; 												//ì¦
+				Toindex++; 												//to the ê°€
 			}
 			
 		}
 
 
-		for(int ind = 0; ind<end.size(); ind++) { 						//µ¹·Áµ¹·Á for¹®ÆÇ!
-			result = ""; 												//result°ª ÃÊ±âÈ­
-			for(int st=start.get(ind); st<end.get(ind)+1; st++) { 		//ÇÔ¼öÇü½ÄÀ¸·Î ¸¸µé±â À§ÇØ ÇÑ¹ø ´õ µ¹¸²
-				result +=sc.get(st)+"\n";								//¶óÀÎ Á¸³ª°Ô ºÙ¿©ÁØ´Ù
-				System.out.println("¶óÀÎ ºÙÀÌ±â ="+result); 
+		for(int ind = 0; ind<end.size(); ind++) { 						//ëŒë ¤ëŒë ¤ forë¬¸íŒ!
+			result = ""; 												//resultê°’ ì´ˆê¸°í™”
+			for(int st=start.get(ind); st<end.get(ind)+1; st++) { 		//í•¨ìˆ˜í˜•ì‹ìœ¼ë¡œ ë§Œë“¤ê¸° ìœ„í•´ í•œë²ˆ ë” ëŒë¦¼
+				result +=sc.get(st)+"\n";								//ë¼ì¸ ì¡´ë‚˜ê²Œ ë¶™ì—¬ì¤€ë‹¤
+				System.out.println("ë¼ì¸ ë¶™ì´ê¸° ="+result); 
 			}
-			res.put((ind+1), result); 									//res¿¡ ³Ö¾îÁÜ
-			System.out.println((ind+1)+"¹ø µé¾î°¨");
+			res.put((ind+1), result); 									//resì— ë„£ì–´ì¤Œ
+			System.out.println((ind+1)+"ë²ˆ ë“¤ì–´ê°");
 		}
 
 		System.out.println("LineBuffer\n"+res.get(1));
 		System.out.println("LineBuffer\n"+res.get(2));
-		for(int i=0; i<sc.size();i++) { 								//¶óÀÎÈ®ÀÎÇÏ·Á°í µ¹·Áº½
-			System.out.println(i+1+"¹øÂ° ¶óÀÎ = "+sc.get(i+1));
+		for(int i=0; i<sc.size();i++) { 								//ë¼ì¸í™•ì¸í•˜ë ¤ê³  ëŒë ¤ë´„
+			System.out.println(i+1+"ë²ˆì§¸ ë¼ì¸ = "+sc.get(i+1));
 		}
 		return res;
 	}
 
 	
-	public CoreBuffer onelineread(String hashmap) {	// ¿©±â stringÀº 1¶óÀÎ¾¿ ÀÚ¸¥ ÄÚµåÀÇ ÇÑÁÙÂ¥¸® ÄÚµåÀÓ
-		String[] lineSplit = hashmap.split(" ");// ¿©±â¼­ ½ºÇÃ¸´À» ¿©·¯ÇüÅÂ·Î ÇØÁà¾ßÇÔ
-												//¸¸¾à =ÀÌ ÀÖÀ» °æ¿ì ¾çÂÊÀÇ °ªÀ» ºñ±³´ëÁ¶ÇØÁà¾ßÇÏ°Å³ª
-												//ÄÉÀÌ½ºº°·Î Â¥°³¾ßÇÔ
+	public CoreBuffer onelineread(String hashmap) {	// ì—¬ê¸° stringì€ 1ë¼ì¸ì”© ìë¥¸ ì½”ë“œì˜ í•œì¤„ì§œë¦¬ ì½”ë“œì„
+		String[] lineSplit = hashmap.split(" ");// ì—¬ê¸°ì„œ ìŠ¤í”Œë¦¿ì„ ì—¬ëŸ¬í˜•íƒœë¡œ í•´ì¤˜ì•¼í•¨
+												//ë§Œì•½ =ì´ ìˆì„ ê²½ìš° ì–‘ìª½ì˜ ê°’ì„ ë¹„êµëŒ€ì¡°í•´ì¤˜ì•¼í•˜ê±°ë‚˜
+												//ì¼€ì´ìŠ¤ë³„ë¡œ ì§œê°œì•¼í•¨
 		//int a;
-		System.out.println("ÇÑ¶óÀÎ¸¸ ÀĞ±â");
+		System.out.println("í•œë¼ì¸ë§Œ ì½ê¸°");
 		if(lineSplit[0].equals(ParameterType.INT)) {
 			
 		}
@@ -113,7 +116,7 @@ public class CodeBuffer {
 	
 	public CoreBuffer allRead(HashMap<Integer, String> hashmap) {
 		
-		System.out.println("ÀüºÎÀĞ¾îµéÀÌ±â");
+		System.out.println("ì „ë¶€ì½ì–´ë“¤ì´ê¸°");
 		
 		for(int i=0;i<hashmap.size();i++) {
 		corebuffer =onelineread(hashmap.get(i));

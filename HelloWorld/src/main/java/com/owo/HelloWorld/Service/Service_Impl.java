@@ -2,18 +2,24 @@ package com.owo.HelloWorld.Service;
 
 import java.util.HashMap;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 import com.owo.HelloWorld.Buffer.CodeBuffer;
 import com.owo.HelloWorld.Buffer.CoreBuffer;
 
 @Service
 public class Service_Impl implements MainService{
-
+    
+    @Inject
 	CodeBuffer codebuffer;
 	
 	@Override
 	public HashMap<Integer, String> splitCode(String text) {
-		return codebuffer.splitCode(text);
+	    System.out.println("서비스부분"+text);
+	    HashMap<Integer, String> res = new HashMap<Integer, String>();
+	   res = codebuffer.splitCode(text);
+		return res;
 	}
 
 	@Override
