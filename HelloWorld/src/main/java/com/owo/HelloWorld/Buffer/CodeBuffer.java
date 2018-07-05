@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
+import com.owo.HelloWorld.Buffer.Enum.ParameterType;
 
 public class CodeBuffer {
 	/* 
@@ -14,11 +15,12 @@ public class CodeBuffer {
 	 * corebuffer에 있는 해시맵에 다시 담아주는 작업을 실시한다.
 	 */
 
-
-
+	CoreBuffer corebuffer = new CoreBuffer();
+	HashMap<Integer, String> res = new HashMap<Integer, String>();
+	
+	
 	public HashMap<Integer, String> splitCode(String text) {
 		System.out.println("split 들어옴");
-		HashMap<Integer, String> res = new HashMap<Integer, String>();
 		if(text != null) { 								//텍스트 널 아니면
 			String[] sp = text.split("\n"); 			// 자르셈
 			for(int i = 0; i < sp.length; i++) { 		//포문돌림
@@ -94,5 +96,32 @@ public class CodeBuffer {
 		return res;
 	}
 
+	
+	public CoreBuffer onelineread(String hashmap) {	// 여기 string은 1라인씩 자른 코드의 한줄짜리 코드임
+		String[] lineSplit = hashmap.split(" ");// 여기서 스플릿을 여러형태로 해줘야함
+												//만약 =이 있을 경우 양쪽의 값을 비교대조해줘야하거나
+												//케이스별로 짜개야함
+		//int a;
+		System.out.println("한라인만 읽기");
+		if(lineSplit[0].equals(ParameterType.INT)) {
+			
+		}
+		
+		return null;
+		
+	}
+	
+	public CoreBuffer allRead(HashMap<Integer, String> hashmap) {
+		
+		System.out.println("전부읽어들이기");
+		
+		for(int i=0;i<hashmap.size();i++) {
+		corebuffer =onelineread(hashmap.get(i));
+		}
+		
+		
+		
+		return corebuffer;
+	}
 
 }
