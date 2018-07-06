@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 import com.owo.HelloWorld.Buffer.Enum.ParameterType;
+import com.owo.HelloWorld.Buffer.LineRead.LineRead;
 
 @Repository
 public class CodeBuffer {
@@ -19,7 +20,8 @@ public class CodeBuffer {
 	 */
 
 	CoreBuffer corebuffer = new CoreBuffer();
-	
+	LineRead lineread;
+	ParamBean parambean;
 	
 	public HashMap<String, String> splitCode(String text) {
 	    HashMap<String, String> res = new HashMap<String, String>();
@@ -102,18 +104,26 @@ public class CodeBuffer {
 	}
 
 	
-	public CoreBuffer onelineread(String hashmap) {	// 여기 string은 1라인씩 자른 코드의 한줄짜리 코드임
-		String[] lineSplit = hashmap.split(" ");// 여기서 스플릿을 여러형태로 해줘야함
-												//만약 =이 있을 경우 양쪽의 값을 비교대조해줘야하거나
-												//케이스별로 짜개야함
+	public CoreBuffer onelineread(String text) {	// 여기 string은 1라인씩 자른 코드의 한줄짜리 코드임
+		String[] lineSplit = text.split(" ");		//여기서 스플릿을 여러형태로 해줘야함
+									//만약 =이 있을 경우 양쪽의 값을 비교대조해줘야하거나
+													//케이스별로 짜개야함
 		//int a;
+		
+		ParameterType[] a = ParameterType.values();
 		System.out.println("한라인만 읽기");
-		if(lineSplit[0].equals(ParameterType.INT)) {
+		//System.out.println(a[0].toString());
+		System.out.println("소문자변경 됨?"+(a[1].toString()).toLowerCase());
+		System.out.println(lineSplit[0]);
+		if(lineSplit[0].contains((a[2].toString()).toLowerCase())) {
 			
+			System.out.println("if문 들어왔음. INT타입");
+			parambean = lineread.case_VariableDeclaration(text);
+			System.out.println("if문 나가기 전");
+			//System.out.println(parambean);
+			//corebuffer.setParam(parambean);
 		}
-		
 		return null;
-		
 	}
 	
 	public CoreBuffer allRead(HashMap<String, String> hashmap) {
