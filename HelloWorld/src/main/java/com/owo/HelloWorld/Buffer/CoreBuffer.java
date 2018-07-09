@@ -2,6 +2,8 @@ package com.owo.HelloWorld.Buffer;
 
 import java.util.HashMap;
 
+import com.owo.HelloWorld.Buffer.Bean.ParamBean;
+
 public class CoreBuffer {
 	/*
 	 * 제어문과 관련한 정보를 담기위한 controlStetement의 object타입 value에 
@@ -10,33 +12,34 @@ public class CoreBuffer {
 	 * switch문이 있으면 관련된 객체를 다르게 담아주어야 하기 때문이다.
 	 */
 	
-	HashMap<Integer,Object> param = new HashMap();		//변수 선언
-	HashMap<Integer,Object> method = new HashMap();		//함수 선언
-	HashMap<Integer,Object> controlStatement = new HashMap();//제어문 정보
-	HashMap<Integer,Object> allLine = new HashMap();//라인 통째로 해쉬맵에 저장
+	HashMap<String,Object> param = new HashMap();		//변수 선언
+	HashMap<String,Object> method = new HashMap();		//함수 선언
+	HashMap<String,Object> controlStatement = new HashMap();//제어문 정보
+	HashMap<String,Object> allLine = new HashMap();//라인 통째로 해쉬맵에 저장
 	
-	public HashMap<Integer, Object> getParam() {
+	public HashMap<String, Object> getParam() {
 		return param;
 	}
-	public void setParam(HashMap<Integer, Object> param) {
-		this.param = param;
+	public void setParam(String string,Object pb) {
+		System.out.println(pb+"셋파람 들어옴 "+string);
+		param.put(string+"p", pb);
 	}
-	public HashMap<Integer, Object> getMethod() {
+	public HashMap<String, Object> getMethod() {
 		return method;
 	}
-	public void setMethod(HashMap<Integer, Object> method) {
+	public void setMethod(HashMap<String, Object> method) {
 		this.method = method;
 	}
-	public HashMap<Integer, Object> getControlStatement() {
+	public HashMap<String, Object> getControlStatement() {
 		return controlStatement;
 	}
-	public void setControlStatement(HashMap<Integer, Object> controlStatement) {
+	public void setControlStatement(HashMap<String, Object> controlStatement) {
 		this.controlStatement = controlStatement;
 	}
-	public HashMap<Integer, Object> getAllLine() {
+	public HashMap<String, Object> getAllLine() {
 		return allLine;
 	}
-	public void setAllLine(HashMap<Integer, Object> allLine) {
+	public void setAllLine(HashMap<String, Object> allLine) {
 		this.allLine = allLine;
 	}
 	
