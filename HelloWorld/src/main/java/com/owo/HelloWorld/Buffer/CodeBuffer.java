@@ -1,141 +1,29 @@
 package com.owo.HelloWorld.Buffer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import org.springframework.stereotype.Repository;
+
+import com.owo.HelloWorld.Buffer.Bean.MethodBean;
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
-import com.owo.HelloWorld.Buffer.Enum.ParameterType;
-import com.owo.HelloWorld.Buffer.LineRead.LineRead;
 
-@Repository
-public class CodeBuffer {
-	/* 
-	 * 코어 버퍼에 한꺼번에 모아서 객체를 전달할 예정이기 때문에
-	 * 라인 버퍼까지 있을 필요가 없을 수도 있기때문
-	 * 여기로 코드 전부를 모아서 바로 core로 보내는 함수를 전부 만든다.
-	 * line별로 스플릿한 해시맵을 라인수대로 차례차례검사하면서
-	 * corebuffer에 있는 해시맵에 다시 담아주는 작업을 실시한다.
-	 */
-
-	CoreBuffer corebuffer = new CoreBuffer();
-	LineRead lineread;
-	ParamBean parambean;
-
-	public HashMap<String, String> splitCode(String text) {
-	    HashMap<String, String> res = new HashMap<String, String>();
-		System.out.println("split 들어옴");
-		if(text != null) { 								//텍스트 널 아니면
-			String[] sp = text.split("\n"); 			// 자르셈
-			for(int i = 0; i < sp.length; i++) { 		//포문돌림
-				res.put((i+1)+"line", sp[i]); 					//res해쉬맵에 넣어
-				System.out.println(res.get((i+1)+"line")); 		//찍어
-			}
-			return res; 								//컨트롤러에서 불렀잖; ;;리턴해
-		}
-		return null;
-	}
-
-
-
-
-	public HashMap<String, String>  methodSplit(HashMap<String, String> sc){ //메소드 잘라서 붙이는거임
-
-		HashMap<String, String> res = new HashMap<String, String>();	//해쉬맵임
-		ArrayList list = new ArrayList();								//라인 나눈거 받은거 get한거 넣은 리스트임
-		String result; 										//결과값임
-		ArrayList<Integer> start = new ArrayList<Integer>(); 			//시작라인 어레이리스트임
-		ArrayList<Integer> end = new ArrayList<Integer>(); 				//끝라인임 ㅎㅎ
-		//String[] msd = null; 											//msd배열임 null로 초기화 ㅎㅎ 일단주석
-		int Sindex = 0; 									//스타트인덱스
-		int Eindex = 0;										//끝인덱스
-		int Toindex = 0; 									//총 인덱스
-		int startcbcnt = 0;									//여는 중괄호 { 카운트
-		int endcbcnt = 0;									//닫는 중괄호 } 카운트
-		
-		for(int i=0; i<sc.size(); i++) { 								//돌려돌려 for문판!
-			if(sc.get((i+1)+"line").contains("{")) {
-				startcbcnt++;
-			}
-			if(sc.get((i+1)+"line").contains("}")) {
-				endcbcnt++;
-			}
-			
-			if((startcbcnt-endcbcnt)==1&&sc.get((i+1)+"line").contains("(")&&!sc.get((i+1)+"line").contains(";")) { //만약에~말야~
-				System.out.println("시작라인 확인"); 						//찍어봄 함
-				start.add(i+1); 										//스타트 넣어줌
-				list.add(sc.get((i+1)+"line")); 									//리스트에 넣어 if문에 걸리는거
-				System.out.println("시작라인"+list.get(Toindex)+"라인번호 = "+start.get(Sindex)); //찍어�R다
-				Sindex++; 												//증
-				Toindex++; 												//가
-			}
-			if((startcbcnt==endcbcnt)&&sc.get((i+1)+"line").contains("}")) { 							//끝찾기
-
-				System.out.println("끝라인 체크");
-				end.add(i+1); 											//end 리스트에 넣음
-				list.add(sc.get((i+1)+"line")); 									// 끝라인 넣음
-				System.out.println("끝라인"+list.get(Toindex) + "라인번호 = " +end.get(Eindex));
-				Eindex++; 												//증
-				Toindex++; 												//to the 가
-			}
-			
-		}
-
-
-		for(int ind = 0; ind<end.size(); ind++) { 						//돌려돌려 for문판!
-			result = ""; 												//result값 초기화
-			for(int st=start.get(ind); st<end.get(ind)+1; st++) { 		//함수형식으로 만들기 위해 한번 더 돌림
-				result +=sc.get(st+"line")+"\n";								//라인 존나게 붙여준다
-				System.out.println("라인 붙이기 ="+result); 
-			}
-			res.put((ind+1)+"line", result); 									//res에 넣어줌
-			System.out.println((ind+1)+"번 들어감");
-		}
-		
-		for(int i=0; i<res.size(); i++) {
-		    System.out.println("LineBuffer\n"+(i+1)+"번째 함수"+res.get((i+1)+"line"));		    
-		}
-
-		for(int i=0; i<sc.size();i++) { 								//라인확인하려고 돌려봄
-			System.out.println(i+1+"번째 라인 = "+sc.get((i+1)+"line"));
-		}
-		return res;
-	}
+public interface CodeBuffer {
+	
+	public ParamBean case_VariableDeclaration(int lineNumber,String line); 
+	//변수선언과 관련된 함수
+	
+	public MethodBean case_functionDefine(int lineNumber,String line,HashMap<String,String> splitcode);
+	//메소드 선언과 정의 관련된 함수
+	
+	public HashMap<String, String> methodSplit(HashMap<String, String> sc);
+	//메소드 별로 짤라줌 void main(){ ~~ } / int result(int a,int,b){ ~~ }
+	
+	public ParamBean case_substitution(int lineNumber,String line);
+	//변수연산 및 숫자 연산과 관련된 함수
+	
+	public Object operation_result();
+	//수학적연산과 관련된 함수
+	//float, double, int등 여러가지 변수형태를 써야할 것 같아서 object로 리턴값 주긴 했는데 더 좋은거 있으면 말좀 (후보 : math, )
+	
+	
 
 	
-	public CoreBuffer onelineread(String text) {	// 여기 string은 1라인씩 자른 코드의 한줄짜리 코드임
-		String[] lineSplit = text.split(" ");		//여기서 스플릿을 여러형태로 해줘야함
-									//만약 =이 있을 경우 양쪽의 값을 비교대조해줘야하거나
-													//케이스별로 짜개야함
-		//int a;
-		
-		ParameterType[] a = ParameterType.values();
-		System.out.println("한라인만 읽기");
-		//System.out.println(a[0].toString());
-		System.out.println("소문자변경 됨?"+(a[1].toString()).toLowerCase());
-		System.out.println(lineSplit[0]);
-		if(lineSplit[0].contains((a[2].toString()).toLowerCase())) {
-			
-			System.out.println("if문 들어왔음. INT타입");
-			parambean = lineread.case_VariableDeclaration(text);
-			System.out.println("if문 나가기 전");
-			//System.out.println(parambean);
-			//corebuffer.setParam(parambean);
-		}
-		return null;
-	}
-	
-	public CoreBuffer allRead(HashMap<String, String> hashmap) {
-		
-		System.out.println("전부읽어들이기");
-		System.out.println(hashmap);
-		
-		for(int i=0;i<hashmap.size();i++) {
-		corebuffer =onelineread(hashmap.get((i+1)+"line"));
-		}
-		
-		
-		
-		return corebuffer;
-	}
-
 }
