@@ -2,9 +2,7 @@ package com.owo.HelloWorld.Buffer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.springframework.stereotype.Repository;
-
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 import com.owo.HelloWorld.Buffer.Enum.ParameterType;
 import com.owo.HelloWorld.Buffer.LineRead.LineRead;
@@ -22,7 +20,7 @@ public class CodeBuffer {
 	CoreBuffer corebuffer = new CoreBuffer();
 	LineRead lineread;
 	ParamBean parambean;
-	
+
 	public HashMap<String, String> splitCode(String text) {
 	    HashMap<String, String> res = new HashMap<String, String>();
 		System.out.println("split 들어옴");
