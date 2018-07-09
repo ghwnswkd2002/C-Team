@@ -67,7 +67,10 @@ public class MainController {
 		System.out.println("바뀌었나?");
 		System.out.println(corebuffer.getParam().get("1line"));
 		System.out.println(corebuffer.getParam());
-		jobject.put("keys", corebuffer);
+		JSONObject paramjson = new JSONObject();
+		paramjson.put("keys", corebuffer.getParam());
+		
+		jobject.put("paramjson", paramjson);
 		//jobject.put("corebuffer", corebuffer);
 		//object.put("core", corebuffer);
 		//이렇게 보내면 안되거나 불편할 수 있으니까 코어버퍼안에있는 해쉬맵자체를 json으로 만들어서 보내기
