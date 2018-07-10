@@ -28,6 +28,12 @@ public class MainController {
 		return "codeAndCanvas";
 	}
 	
+	@RequestMapping("/test")
+	public String test() {
+		System.out.println("test");
+		return "test";
+	}
+	
 	
 	@RequestMapping("/ajax")
 	@ResponseBody	//requestbody해서 json으로 받은거를 여기서 string으로 형변환

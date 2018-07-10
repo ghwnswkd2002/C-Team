@@ -92,10 +92,17 @@
                   height="200px" style="border:1px solid black"></canvas> </script>
 
 
+
             </td>
          </tr>
       </table>
    </center>
+				</td>
+			</tr>
+		</table>
+		<a href="./test">go test</a>
+	</center>
+
 
 
 
