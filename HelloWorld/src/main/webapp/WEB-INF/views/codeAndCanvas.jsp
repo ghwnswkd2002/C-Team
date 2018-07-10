@@ -72,7 +72,6 @@
 						<textarea id="code" name="code" cols="67" rows="15"></textarea>
 					</form>
 				</td>
-				<td>그림이다</td>
 				<td>
 					<h3>그림이다아아아아</h3> <canvas id="myCanvas" width="200px"
 						height="200px" style="border:1px solid black"></canvas> </script>

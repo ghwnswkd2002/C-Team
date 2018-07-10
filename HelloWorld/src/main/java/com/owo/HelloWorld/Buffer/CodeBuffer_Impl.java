@@ -246,9 +246,9 @@ public class CodeBuffer_Impl implements CodeBuffer{
 	@Override
 	public Object operation_result() {
 		//수학적 연산하고 관련된 함수인데 리턴타입을 뭘로줄지 모르겠어서 일단 object로 줬음 더좋은거있으면 그걸로 반환
-
-
-
+		
+		
+		
 		return null;
 	}
 
