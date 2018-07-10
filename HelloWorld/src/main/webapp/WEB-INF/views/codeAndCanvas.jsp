@@ -81,6 +81,7 @@
 				</td>
 			</tr>
 		</table>
+		<a href="./test">go test</a>
 	</center>
 
 

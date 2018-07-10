@@ -42,15 +42,6 @@ public class CodeBuffer_Impl implements CodeBuffer{
 		String[] dev = line.split(" ");
 		param = new ParamBean();
 
-<<<<<<< HEAD
-//		System.out.println(line +"¿©±ä º¯¼öºÎºĞ ÂïÈ÷³Ä");
-//		for(int i = 0; i<dev.length; i++) {
-//			System.out.println("dev"+i+"="+dev[i]);
-//		}
-		
-		for(ParameterType parameterType : ParameterType.values()) {//ÀÏ¹İÀûÀ¸·Î¾È¶ç¿ì°í ¼±¾ğÇÑ°æ¿ì
-			System.out.println("for¹® µé¾î¿È");
-=======
 		System.out.println(line +"ì—¬ê¸´ ë³€ìˆ˜ë¶€ë¶„ ì°íˆëƒ");
 		for(int i = 0; i<dev.length; i++) {
 			System.out.println("dev"+i+"="+dev[i]);
@@ -58,7 +49,6 @@ public class CodeBuffer_Impl implements CodeBuffer{
 
 		for(ParameterType parameterType : ParameterType.values()) {
 			System.out.println("forë¬¸ ë“¤ì–´ì˜´");
->>>>>>> branch 'master' of https://github.com/ghwnswkd2002/C-Team.git
 			if(dev[0].toUpperCase().equals(parameterType.toString())&&!line.contains("=")) {
 				System.out.println("ifë¬¸");
 				//enum ì•ˆì— ìˆëŠ” Strindê³¼ splití•œ ë°°ì—´ ì²«ë²ˆì§¸ë‘ ê°™ì€ê²Œ ìˆëŠ”ì§€ í™•ì¸
@@ -68,22 +58,11 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				System.out.println(dev[0]+"ì´ê±° ë„£ì„ê²Œ ì´ˆê¸°í™” ì•ˆí•´ë„ëŒ€ëŠ”ê±°ì•¼ ");
 				param.setParamType(dev[0]);
 				param.setParamName(dev[1].replaceAll(";",""));
-<<<<<<< HEAD
-				
-=======
 
->>>>>>> branch 'master' of https://github.com/ghwnswkd2002/C-Team.git
 			} else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")) {
-<<<<<<< HEAD
-				//ÃÊ±âÈ­ ÇØ¼­ ¼±¾ğÇÑ °æ¿ì
-				System.out.println("else if¹®");
-				//enum ¾È¿¡ ÀÖ´Â String°ú splitÇÑ ¹è¿­ Ã¹¹øÂ°¶û °°Àº°Ô ÀÖ´ÂÁö È®ÀÎ
-				//±Ùµ¥ ÃÊ±ê°ª ¼³Á¤ µÇ¾î ÀÖÀ½
-=======
 				System.out.println("else ifë¬¸");
 				//enum ì•ˆì— ìˆëŠ” Stringê³¼ splití•œ ë°°ì—´ ì²«ë²ˆì§¸ë‘ ê°™ì€ê²Œ ìˆëŠ”ì§€ í™•ì¸
 				//ê·¼ë° ì´ˆê¹ƒê°’ ì„¤ì • ë˜ì–´ ìˆìŒ
->>>>>>> branch 'master' of https://github.com/ghwnswkd2002/C-Team.git
 				//EX. int a = 40;
 				param.setParamType(dev[0]);
 				System.out.println("setParamType============de[0]ì— ë„£ìŒ");
@@ -96,26 +75,9 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				System.out.println("temp[0]ì— ë„£ìŒ");
 				param.setParamLine(String.valueOf(lineNumber));
 				param.setParamValue(temp[1].replaceAll(";",""));
-<<<<<<< HEAD
-				System.out.println("¼¦");
-=======
 
 				System.out.println("ìƒ·");
->>>>>>> branch 'master' of https://github.com/ghwnswkd2002/C-Team.git
 			}
-<<<<<<< HEAD
-			//ÃÊ±âÈ­ ÇÒ¶§ ¶ç¿ö¼­ ¼±¾ğµÈ °æ¿ì
-			else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")&&dev.length>2) {
-				
-			}
-			//ÃÊ±âÈ­ ÇÑ º¯¼ö°¡ char¿¡ ¹®ÀÚ¿­ ´ã¾ÒÀ»°æ¿ì
-			else if(dev[0].equals("char")) {
-				
-			}
-			//Æ÷ÀÎÅÍ ÀÎ°æ¿ì
-			
-			
-=======
 			//ì´ˆê¸°í™” í• ë•Œ ë„ì›Œì„œ ì„ ì–¸ëœ ê²½ìš°
 			else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")&&dev.length>2) {
 
@@ -125,7 +87,6 @@ public class CodeBuffer_Impl implements CodeBuffer{
 
 			}
 			//í¬ì¸í„°ì¸ ê²½ìš°
->>>>>>> branch 'master' of https://github.com/ghwnswkd2002/C-Team.git
 		}
 
 

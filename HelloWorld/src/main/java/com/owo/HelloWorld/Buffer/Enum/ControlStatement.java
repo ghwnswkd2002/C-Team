@@ -2,7 +2,7 @@ package com.owo.HelloWorld.Buffer.Enum;
 
 public enum ControlStatement {
 	
-	IF, FOR, WHILE, DOWHILE, IFELSE, ELSE, SWITCH, BREAK
+	IF, FOR, WHILE, DOWHILE, IFELSE, ELSE, SWITCH
 	
 }
 

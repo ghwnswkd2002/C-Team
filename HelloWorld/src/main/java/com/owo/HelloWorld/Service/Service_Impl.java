@@ -24,9 +24,8 @@ public class Service_Impl implements MainService{
 
 	@Inject
 	CodeBuffer codebuffer;
-
+	MainService mainservice;
 	CoreBuffer corebuffer = new CoreBuffer();
-	MainService mainservice; 
 
 	@Override
 	public HashMap<String, String> splitCode(String text) {
