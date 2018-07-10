@@ -10,6 +10,7 @@ import com.owo.HelloWorld.Buffer.CodeBuffer;
 import com.owo.HelloWorld.Buffer.CoreBuffer;
 import com.owo.HelloWorld.Buffer.Bean.MethodBean;
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
+import com.owo.HelloWorld.Buffer.Enum.ControlStatement;
 import com.owo.HelloWorld.Buffer.Enum.ParameterType;
 
 @Service
@@ -67,16 +68,24 @@ public class Service_Impl implements MainService{
 				System.out.println("paramline"+parambean.getParamLine());
 				return parambean;
 			}
-			else if(code.toUpperCase().contains(parameterType.toString())&&code.contains("(")&&code.contains(")")) {										//함수선언일경우
+			else if(!code.contains("for")&&code.toUpperCase().contains(parameterType.toString())&&code.contains("(")&&code.contains(")")) {										//함수선언일경우
 				System.out.println("함수케이스 들어가버렷스");
 				MethodBean methodbean = new MethodBean();
 				
 				methodbean = codebuffer.case_functionDefine(lineNumber,code,splitcode);
-			}
+			}	
+		}
+		for(ControlStatement controlstatement : ControlStatement.values()) {
+		    if(code.toUpperCase().contains(controlstatement.toString())) {
+		        System.out.println("for문");
+		    }
+		    
+		    
+		    
 		}
 
 
-		return null;//임시
+		return "lineRead부분";//임시
 
 	}
 
@@ -90,10 +99,10 @@ public class Service_Impl implements MainService{
 																		// 이거 어떻게 해야하지
 		
 		System.out.println("전부읽어들이기");
-		System.out.println(splitcode);
+		System.out.println("allRead부분"+splitcode);
 		//HashMap<String, String> temp = new HashMap<String,String>();
 
-
+		int j= 1;
 		for(int i=1;i<splitcode.size()+1;i++) {
 			Object obj = new Object();
 			//	System.out.println(hashmap.get(i+"line"));
@@ -107,8 +116,9 @@ public class Service_Impl implements MainService{
 			if(obj instanceof ParamBean) {	//Object의 타입을 알아내기위함
 				System.out.println(obj instanceof ParamBean);
 
-				corebuffer.setParam(i+"line",obj);
+				corebuffer.setParam(j+"line",obj);
 				System.out.println("같냐안간나");
+				j++;
 			}
 		}
 

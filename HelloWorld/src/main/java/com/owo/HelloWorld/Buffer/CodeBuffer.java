@@ -2,6 +2,7 @@ package com.owo.HelloWorld.Buffer;
 
 import java.util.HashMap;
 
+import com.owo.HelloWorld.Buffer.Bean.ForBean;
 import com.owo.HelloWorld.Buffer.Bean.MethodBean;
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 
@@ -23,6 +24,8 @@ public interface CodeBuffer {
 	//수학적연산과 관련된 함수
 	//float, double, int등 여러가지 변수형태를 써야할 것 같아서 object로 리턴값 주긴 했는데 더 좋은거 있으면 말좀 (후보 : math, )
 	
+	public ForBean Iterators();
+	//반복문
 	
 
 	

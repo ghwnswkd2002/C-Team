@@ -53,10 +53,10 @@ public class MainController {
 		
 		
 		//System.out.println("메소드스플릿 들어감");
-		//HashMap<String,String> codeall = service.methodSplit(splitcode);
+		HashMap<String,String> codeall = service.methodSplit(splitcode);
 		//System.out.println("메소드 스플릿 나옴");
 		
-		//System.out.println("codeall 찍기"+codeall);		//임시막아둠
+		System.out.println("codeall 찍기"+codeall);		//임시막아둠
 		
 		
 		/*********************************************/
@@ -67,10 +67,10 @@ public class MainController {
 		System.out.println("바뀌었나?");
 		System.out.println(corebuffer.getParam().get("1line"));
 		System.out.println(corebuffer.getParam());
-		JSONObject paramjson = new JSONObject();
-		paramjson.put("keys", corebuffer.getParam());
+		//JSONObject paramjson = new JSONObject();
+		jobject.put("keys", corebuffer);
 		
-		jobject.put("paramjson", paramjson);
+		//jobject.put("paramjson", paramjson);
 		//jobject.put("corebuffer", corebuffer);
 		//object.put("core", corebuffer);
 		//이렇게 보내면 안되거나 불편할 수 있으니까 코어버퍼안에있는 해쉬맵자체를 json으로 만들어서 보내기

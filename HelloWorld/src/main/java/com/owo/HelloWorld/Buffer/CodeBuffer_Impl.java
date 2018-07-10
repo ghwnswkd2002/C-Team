@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
+import com.owo.HelloWorld.Buffer.Bean.ForBean;
 import com.owo.HelloWorld.Buffer.Bean.MethodBean;
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 import com.owo.HelloWorld.Buffer.Enum.ParameterType;
@@ -251,6 +252,15 @@ public class CodeBuffer_Impl implements CodeBuffer{
 
 		return null;
 	}
+
+
+    @Override
+    public ForBean Iterators() {
+        
+        
+        
+        return null;
+    }
 
 }
 

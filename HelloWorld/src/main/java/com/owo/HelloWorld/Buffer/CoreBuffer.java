@@ -22,7 +22,7 @@ public class CoreBuffer {
 	}
 	public void setParam(String string,Object pb) {
 		System.out.println(pb+"셋파람 들어옴 "+string);
-		param.put(string+"p", pb);
+		param.put("p"+string, pb);
 	}
 	public HashMap<String, Object> getMethod() {
 		return method;
