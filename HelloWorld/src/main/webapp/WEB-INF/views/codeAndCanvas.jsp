@@ -83,6 +83,7 @@
                <form name=codeform>
                   <h3>코드다아아아아</h3>
 
+<<<<<<< HEAD
                   <textarea id="code" name="code" cols="67" rows="15"></textarea>
                </form>
             </td>
@@ -94,6 +95,16 @@
          </tr>
       </table>
    </center>
+=======
+						<textarea id="code" name="code" cols="67" rows="15"></textarea>
+					</form>
+				</td>
+				<td>
+					<h3>그림이다아아아아</h3> <canvas id="myCanvas" width="200px"
+						height="200px" style="border:1px solid black"></canvas> </script>
+
+
+>>>>>>> refs/remotes/origin/master
 				</td>
 			</tr>
 		</table>
