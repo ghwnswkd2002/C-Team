@@ -12,15 +12,16 @@ public class CoreBuffer {
 	 * switch문이 있으면 관련된 객체를 다르게 담아주어야 하기 때문이다.
 	 */
 	
-	HashMap<String,Object> param = new HashMap();		//변수 선언
-	HashMap<String,Object> method = new HashMap();		//함수 선언
-	HashMap<String,Object> controlStatement = new HashMap();//제어문 정보
-	HashMap<String,Object> allLine = new HashMap();//라인 통째로 해쉬맵에 저장
+	HashMap<String,ParamBean> param = new HashMap<String,ParamBean>();		//변수 선언
+	HashMap<String,Object> method = new HashMap<String,Object>();		//함수 선언
+	HashMap<String,Object> controlStatement = new HashMap<String,Object>();//제어문 정보
+	HashMap<String,Object> allLine = new HashMap<String,Object>();//라인 통째로 해쉬맵에 저장
 	
-	public HashMap<String, Object> getParam() {
+	
+    public HashMap<String, ParamBean> getParam() {
 		return param;
 	}
-	public void setParam(String string,Object pb) {
+	public void setParam(String string,ParamBean pb) {
 		System.out.println(pb+"셋파람 들어옴 "+string);
 		param.put("p"+string, pb);
 	}

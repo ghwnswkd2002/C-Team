@@ -16,8 +16,9 @@ public interface MainService {
 	// 엔터를 기준으로 자른 코드를 가지고
 	// 한줄한줄 분석하는 함수 for문 돌려서 i = line 
 	
-	public Object lineRead(int lineNumber,String code,HashMap<String, String> splitcode,CoreBuffer corebuffer);
+	public Object lineRead(int lineNumber,String code,HashMap<String, String> splitcode,CoreBuffer corebuffer, int keynum);
 	// 라인별로 들어온 String을 잘라서 분석하는 함수
 	
+	public int nameSearch(CoreBuffer corebuffer,String code) ;
 	
 }

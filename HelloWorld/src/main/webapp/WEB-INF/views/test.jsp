@@ -46,7 +46,7 @@
 		<!-- One -->
 			<article id="one" class="post style1">
 				<div class="image">
-					<img src="/resources/images/pic14.jpg" alt="" data-position="75% center" />
+					<img src="images/pic14.jpg" alt="" data-position="75% center" />
 				</div>
 				<div class="content">
 					<div class="inner">

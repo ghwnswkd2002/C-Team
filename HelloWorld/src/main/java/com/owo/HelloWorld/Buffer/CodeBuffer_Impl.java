@@ -58,6 +58,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				//toUpperCase() 이거는 소문자를 대문자로 바꾸는 함수
 				System.out.println(dev[0]+"이거 넣을게 초기화 안해도대는거야 ");
 				param.setParamType(dev[0]);
+				param.setParamLine(String.valueOf(lineNumber));
 				param.setParamName(dev[1].replaceAll(";",""));
 
 			} else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")) {
@@ -78,6 +79,8 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				param.setParamValue(temp[1].replaceAll(";",""));
 
 				System.out.println("샷");
+			} else if(dev[0]==null&&line.contains("=")) {
+			    System.out.println("================여=기 들어옴=-===============");
 			}
 			//초기화 할때 띄워서 선언된 경우
 			else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")&&dev.length>2) {
@@ -195,10 +198,10 @@ public class CodeBuffer_Impl implements CodeBuffer{
 			if(true) {//EX. a+b=
 
 			}
-			else if(false) {
+			/*else if() {
 
 			}
-		}
+*/		}
 		else if(!temp[0].contains("+")&&!temp[0].contains("-")&&!temp[0].contains("*")&&!temp[0].contains("/")) {
 			//대입하는 곳에 연산기호가 없는 경우
 			
@@ -214,6 +217,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				for(String str : oper) {
 					if(temp[1].contains(str)) {
 						String[] splittemp = temp[1].split(str);
+						System.out.println(splittemp);
 						
 						//splittemp[0]
 								

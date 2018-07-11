@@ -32,5 +32,10 @@ public class ParamBean {
 	public void setParamLine(String paramLine) {
 		this.paramLine = paramLine;
 	}
-	
+	@Override
+	public String toString() {
+	    
+        return getParamLine()+" "+getParamType()+" "+getParamName()+" "+getParamValue();
+	    
+	}
 }

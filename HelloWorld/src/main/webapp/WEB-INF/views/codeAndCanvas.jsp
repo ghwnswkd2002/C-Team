@@ -90,9 +90,6 @@
             <td>
                <h3>그림이다아아아아</h3> <canvas id="myCanvas" width="200px"
                   height="200px" style="border:1px solid black"></canvas> </script>
-
-
-
             </td>
          </tr>
       </table>
@@ -102,9 +99,5 @@
 		</table>
 		<a href="./test">go test</a>
 	</center>
-
-
-
-
 </body>
 </html>
