@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import com.owo.HelloWorld.Buffer.CodeBuffer;
 import com.owo.HelloWorld.Buffer.CoreBuffer;
+import com.owo.HelloWorld.Buffer.Bean.ForBean;
 import com.owo.HelloWorld.Buffer.Bean.MethodBean;
 import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 import com.owo.HelloWorld.Buffer.Enum.ControlStatement;
@@ -67,6 +68,7 @@ public class Service_Impl implements MainService{
         int isvalue = nameSearch(corebuffer, code);
         System.out.println(lineNumber);
         System.out.println("이거뭔ㄷㅔ"+isvalue);
+        
         for(ParameterType parameterType : ParameterType.values()) {
             System.out.println("keynum = "+keynum);
             System.out.println("파라미터타입 = "+parameterType.toString());
@@ -84,8 +86,7 @@ public class Service_Impl implements MainService{
                 MethodBean methodbean = new MethodBean();
 
                 methodbean = codebuffer.case_functionDefine(lineNumber,code,splitcode);
-            }	
-            else if(corebuffer.getParam().get("p"+keynum+"line")==null) {
+            }else if(corebuffer.getParam().get("p"+keynum+"line")==null) {
                 System.out.println("널 들어옴");
                 continue;
             }
@@ -102,10 +103,20 @@ public class Service_Impl implements MainService{
 			   // System.out.println("쉿 조용");
 			//    return 10;
 			}*/
-           
-            
             
         }
+        
+//-----------------------for------------------------------        
+        if(code.contains("for")) {
+			System.out.println("for문 들어갔습니다");
+			ForBean forbean =new ForBean();
+			
+			forbean = codebuffer.case_forLoop(lineNumber, code, splitcode);
+			System.out.println("lineNumber: "+lineNumber+"code: "+code);
+			
+			return forbean;
+		}
+//-----------------------for------------------------------      
         if(isvalue != 0) {
             System.out.println(isvalue);
             String[] tempvalue = code.split("=");
@@ -120,29 +131,8 @@ public class Service_Impl implements MainService{
 
 
         }
-        //	    if(code.contains("=")&&code!=null){
-        //            String[] noParam = code.split("=");
-        //            int j = 1;
-        //            Map<String, Object> check = corebuffer.getParam();
-        //            System.out.println("lineNumber = "+lineNumber );
-        //            System.out.println(check.get("p2line"));
-        //            for(int i = lineNumber; i>0; i--) {
-        //                System.out.println(i+" 찍히는중");
-        //              
-        //              System.out.println(check.get("p2line").toString());
-        //             //   System.out.println(a);
-        //               // System.out.println(check.get("p"+j+"line").getParamName());
-        //              //                   if(noParam[0].equals(check.get("p"+j+"line").getParamName())){
-        //              //                            System.out.println("같음");
-        //              //                            System.out.println();
-        //              //                            corebuffer.setParam("p"+j+"line", noParam[1]);
-        //              //                        }
-        //              //                   else {
-        //              //                       return "error========================";
-        //              //                   }
-        //            }
-        //	}
-        return "lineRead부분";//임시
+     
+       return "lineRead부분";//임시
     }
 
 
@@ -179,7 +169,13 @@ public class Service_Impl implements MainService{
                 corebuffer.setParam(j+"line",pb);
                 System.out.println("같냐안간나");
                 j++;
+            }else if(obj instanceof ForBean) {
+            	ForBean fb = new ForBean();
+            	fb=(ForBean)obj;
+            	//--------여기서부터 ----------
+            	
             }
+            
         }
 
         return corebuffer;

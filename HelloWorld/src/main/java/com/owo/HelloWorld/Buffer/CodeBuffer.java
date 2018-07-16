@@ -26,7 +26,7 @@ public interface CodeBuffer {
 	
 	public ForBean Iterators();
 	//반복문
-	
+	public ForBean case_forLoop (int lineNumber,String line,HashMap<String,String> splitcode); //for문
 
 	
 }

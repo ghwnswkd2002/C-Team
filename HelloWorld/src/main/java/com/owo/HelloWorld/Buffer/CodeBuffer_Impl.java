@@ -80,7 +80,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
 
 				System.out.println("샷");
 			} else if(dev[0]==null&&line.contains("=")) {
-			    System.out.println("================여=기 들어옴=-===============");
+				System.out.println("================여=기 들어옴=-===============");
 			}
 			//초기화 할때 띄워서 선언된 경우
 			else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")&&dev.length>2) {
@@ -188,10 +188,10 @@ public class CodeBuffer_Impl implements CodeBuffer{
 		//EX. a+b=c-d;
 		ParamBean param = new ParamBean();
 		String[] oper = {"+","-","*","/"}; 
-		
-		
-		
-		
+
+
+
+
 		if(temp[0].contains("+")||temp[0].contains("-")||temp[0].contains("*")||temp[0].contains("/")) {
 			//만약에 대입하는 곳에 연산 기호가 있을 경우
 
@@ -201,45 +201,45 @@ public class CodeBuffer_Impl implements CodeBuffer{
 			/*else if() {
 
 			}
-*/		}
+			 */		}
 		else if(!temp[0].contains("+")&&!temp[0].contains("-")&&!temp[0].contains("*")&&!temp[0].contains("/")) {
 			//대입하는 곳에 연산기호가 없는 경우
-			
+
 			if(temp[1].contains("+")||temp[1].contains("-")||temp[1].contains("*")||temp[1].contains("/")) {
 				//뒤에 연산기호가 있는 경우 = a+b
-				
+
 				//for문 돌려서 +_*/중에 어느하나라도 있니 없니 물어보고 난뒤에 있다고하면
 				//스플릿해서 숫자인지 변수인지 확인하고
 				//숫자일경우 그대로 연산
 				//숫자가아니라 변수일 경우 Bean으로 가서 변수value를 데려와서 연산한다.
 				//연산 기호를 어떻게 알아내지?
-				
+
 				for(String str : oper) {
 					if(temp[1].contains(str)) {
 						String[] splittemp = temp[1].split(str);
 						System.out.println(splittemp);
-						
+
 						//splittemp[0]
-								
+
 						/*switch(str) {
 						case "+" :splittemp[0]
 						case "-" :
 						case "*" :
 						case "/" :
 						}*/
-						
+
 					}
-					
+
 				}
-				
-				
+
+
 			}
 			else if(!temp[1].contains("+")&&!temp[1].contains("-")&&!temp[1].contains("*")&&!temp[1].contains("/")) {
 				//뒤에 연산기호가 없는경우 = a 그냥 대입하라
-				
+
 				//연산기호가 없는 경우는 앞의 변수에 뒤에 변수의 값을 전달 해 주기만 하면 된다.
 				//여기서 문제는 어떻게 앞라인 변수의 값이 뒷라인과 달라졌는지 표시(?)가 있어야 하는데 이건 아직 연구해봐야할듯
-				
+
 			}
 
 		}
@@ -251,20 +251,134 @@ public class CodeBuffer_Impl implements CodeBuffer{
 	@Override
 	public Object operation_result() {
 		//수학적 연산하고 관련된 함수인데 리턴타입을 뭘로줄지 모르겠어서 일단 object로 줬음 더좋은거있으면 그걸로 반환
-		
-		
-		
+
+
+
 		return null;
 	}
 
+	@Override				//for문 관련 --------------------------------------------------
+	public ForBean case_forLoop(int lineNumber, String line, HashMap<String, String> splitcode) {
+		// TODO Auto-generated method stub
+		ForBean forbean =new ForBean();
+		System.out.println("forLoop에 들어온 line: "+line);
+		String[] firstSplit = line.split("\\(");				// () 안 값을 얻기위한 split. \\이거 안넣어주면 인식 오류남
+		System.out.println(firstSplit[1]);
+		String[] secondSplit = firstSplit[1].split(";");	// () 안 값을 ; 기준으로 나눈다.
+		System.out.println(secondSplit[0]);
+		String [] array_SignOfInequality = {"<",">","<=",">="};     // 연산자 배열 
+		String SignOfInequality="";
+		if(secondSplit[0].contains("int")) {
+			String [] aboutParam = secondSplit[0].split("=");	// 변수 관련 =을 기준으로 나눔
+			String [] Param = aboutParam[0].split(" ");
+			String ParamName =Param[1];							// 변수명
+			String initialValue =aboutParam[1];
+			forbean.setParamName(ParamName);					// forbean에 변수명 set
+			forbean.setInitialValue(initialValue);				// forbean에 초기값 set
+			System.out.println("변수명 : "+ParamName+"초기값: "+initialValue);
+			String middle = secondSplit[1];						// 부등호 부분
 
-    @Override
-    public ForBean Iterators() {
-        
-        
-        
-        return null;
-    }
+			for(int i =0; i<array_SignOfInequality.length; i++) {			// 부등호 뭔지 체크
+				if(middle.contains(array_SignOfInequality[i])) {
+					SignOfInequality = array_SignOfInequality[i]; 
+					System.out.println("부등호 if문 테스트결과: "+SignOfInequality);
+					forbean.setSignOfInequality(SignOfInequality);			// forbean에 부등호 set    
+				}
+			}
+
+			String [] array_SOIValue = middle.split(SignOfInequality);
+			String SOIValue = array_SOIValue[1];				// 부등호 다음 값
+			forbean.setSOIValue(SOIValue);						// forbean에 부등호 다음 값 set
+			System.out.println(SOIValue);
+			String third = secondSplit[2];						// 증감연산 부분
+			char tmpOperator = third.charAt(ParamName.length()+1);
+			String Operator =Character.toString(tmpOperator);   // 증감연산
+			System.out.println(Operator);
+			forbean.setOperator(Operator);						// forbean에 증감연산 set
+
+			String [] tmpOne = middle.split(SignOfInequality);
+			String One = tmpOne[0].trim();								// 부등호 부분 변수명 ,공백제거
+			String [] tmpTwo = third.split("\\"+Operator);		// \\안붙이면 에러남 
+			String Two = tmpTwo[0].trim();								// 증감연산자 부분 변수명,공백제거
+			System.out.println(ParamName+":"+One +":"+ Two);
+			if(!ParamName.equals(One)||!ParamName.equals(Two)) {	// 변수명 통일되었는지 에러 체크
+				forbean.setError("error");
+				System.out.println("에러 if문 들어옴");
+				System.out.println(forbean.getError());
+			}
+			System.out.println("옹?");
+
+
+
+			System.out.println("loopNum if문 들어옴");
+			int loopNumber=0;
+			int intInitialValue=Integer.parseInt(initialValue);
+			int intSOIValue = Integer.parseInt(forbean.getSOIValue());
+			System.out.println(forbean.getSignOfInequality());
+			if(forbean.getOperator().equals("+")) {							//경우의 수 따라 loopNumber 계산
+				if(forbean.getSignOfInequality().equals("<")) {
+					for(int i=intInitialValue; i < intSOIValue; i++) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals(">")) {
+					for(int i=intInitialValue; i > intSOIValue; i++) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals(">=")) {
+					for(int i=intInitialValue; i >= intSOIValue; i++) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals("<=")) {
+					for(int i=intInitialValue; i <= intSOIValue; i++) {
+						loopNumber++;
+					}
+				}
+			}else if(forbean.getOperator().equals("-")) {
+				if(forbean.getSignOfInequality().equals("<")) {
+					for(int i=intInitialValue; i < intSOIValue; i--) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals(">")) {
+					for(int i=intInitialValue; i > intSOIValue; i--) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals(">=")) {
+					for(int i=intInitialValue; i >= intSOIValue; i--) {
+						loopNumber++;
+					}
+				}else if(forbean.getSignOfInequality().equals("<=")) {
+					for(int i=intInitialValue; i <= intSOIValue; i--) {
+						loopNumber++;
+					}
+				}
+			}
+			if(loopNumber<=0) {
+				forbean.setError("error");
+			}else if(loopNumber>0) {
+				forbean.setLoopNumber(loopNumber);							//forbean에 loopNumber set
+				System.out.println("loopNumber: "+loopNumber);					
+			}
+
+
+
+			//부등호 기준으로 split해서 bean에 넣어주기 (완료)
+			//;세번째꺼는 charat 변수명+1해서 bean에 넣어주기  (완료)
+			//변수명 통일 됐는지 오류 검사해서 bean에 넣어주기 (완료)
+			//service가서 오류가 아닐 때 부등호 다음값 - 초기값 한 값으로 안의 코드 for문 돌려주기 
+
+		}
+
+
+		return forbean;
+	}
+
+	@Override
+	public ForBean Iterators() {
+
+
+
+		return null;
+	}
 
 }
 
