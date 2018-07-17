@@ -67,7 +67,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				//근데 초깃값 설정 되어 있음
 				//EX. int a = 40;
 				param.setParamType(dev[0]);
-				System.out.println("setParamType============de[0]에 넣음");
+				System.out.println("setParamType============dev[0]에 넣음");
 				String[] temp = dev[1].split("=");//=을 기준을 다시 자른다
 				System.out.println("dev[1] "+dev[1]);
 				System.out.println("temp0  "+temp[0]);
@@ -82,6 +82,8 @@ public class CodeBuffer_Impl implements CodeBuffer{
 			} else if(dev[0]==null&&line.contains("=")) {
 				System.out.println("================여=기 들어옴=-===============");
 			}
+		
+			
 			//초기화 할때 띄워서 선언된 경우
 			else if(dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")&&dev.length>2) {
 
@@ -263,16 +265,19 @@ public class CodeBuffer_Impl implements CodeBuffer{
 		ForBean forbean =new ForBean();
 		System.out.println("forLoop에 들어온 line: "+line);
 		String[] firstSplit = line.split("\\(");				// () 안 값을 얻기위한 split. \\이거 안넣어주면 인식 오류남
-		System.out.println(firstSplit[1]);
+		System.out.println("퍼스트 스플릿"+firstSplit[1]);
 		String[] secondSplit = firstSplit[1].split(";");	// () 안 값을 ; 기준으로 나눈다.
-		System.out.println(secondSplit[0]);
+		System.out.println("세컨드 스플릿"+secondSplit[0]);
 		String [] array_SignOfInequality = {"<",">","<=",">="};     // 연산자 배열 
 		String SignOfInequality="";
 		if(secondSplit[0].contains("int")) {
 			String [] aboutParam = secondSplit[0].split("=");	// 변수 관련 =을 기준으로 나눔
+			System.out.println("어바웃 파람0"+aboutParam[0]);
+			System.out.println("어바웃 파람1"+aboutParam[1]);
+			String apSplit = aboutParam[1].replace(" ", "");
 			String [] Param = aboutParam[0].split(" ");
 			String ParamName =Param[1];							// 변수명
-			String initialValue =aboutParam[1];
+			String initialValue =apSplit;
 			forbean.setParamName(ParamName);					// forbean에 변수명 set
 			forbean.setInitialValue(initialValue);				// forbean에 초기값 set
 			System.out.println("변수명 : "+ParamName+"초기값: "+initialValue);
@@ -287,9 +292,10 @@ public class CodeBuffer_Impl implements CodeBuffer{
 			}
 
 			String [] array_SOIValue = middle.split(SignOfInequality);
-			String SOIValue = array_SOIValue[1];				// 부등호 다음 값
+			String SOIValue = array_SOIValue[1].replaceAll(" ", "");				// 부등호 다음 값
+			System.out.println("array_SOIValue[1] = "+array_SOIValue[1]);
 			forbean.setSOIValue(SOIValue);						// forbean에 부등호 다음 값 set
-			System.out.println(SOIValue);
+			System.out.println("SOIvalue 값 = "+SOIValue);
 			String third = secondSplit[2];						// 증감연산 부분
 			char tmpOperator = third.charAt(ParamName.length()+1);
 			String Operator =Character.toString(tmpOperator);   // 증감연산

@@ -120,6 +120,8 @@ public class Service_Impl implements MainService{
         if(isvalue != 0) {
             System.out.println(isvalue);
             String[] tempvalue = code.split("=");
+            System.out.println("value"+tempvalue[1]);
+            tempvalue[1] = tempvalue[1].replaceAll(" ","");
             corebuffer.getParam().get("p"+isvalue+"line").setParamValue(tempvalue[1].replaceAll(";", ""));
         }
 
@@ -177,13 +179,14 @@ public class Service_Impl implements MainService{
             }
             
         }
-
-        return corebuffer;
+                            
+        return corebuffer;  
     }
 
     @Override
     public int nameSearch(CoreBuffer corebuffer,String code) {
         String[] key = code.split("=");
+        key[0]=key[0].replaceAll(" ", "");
         int i;
         for(i = 1; i<=corebuffer.getParam().size();i++) {
             if(key[0].equals(corebuffer.getParam().get("p"+i+"line").getParamName())){
