@@ -64,7 +64,8 @@ public class Service_Impl implements MainService{
         System.out.println("한라인만 읽기");
         System.out.println(code);
 
-
+      //  int povalue = pointerNameSearch(corebuffer, code);
+//System.out.println("POVALUEEEEEEEEEEEEEEEEE"+povalue);
         int isvalue = nameSearch(corebuffer, code);
         System.out.println(lineNumber);
         System.out.println("이거뭔ㄷㅔ"+isvalue);
@@ -81,6 +82,15 @@ public class Service_Impl implements MainService{
                 //parambean.setKeyNum(keynum);
                 return parambean;
             }
+           /* else if(code.toUpperCase().contains(parameterType.toString())&&!code.contains("(")&&code.contains("*")) {
+                System.out.println("포인터쪽 int 드르가");
+                parambean = codebuffer.case_VariableDeclaration(lineNumber,code);
+                System.out.println("paramname"+parambean.getParamName());
+                System.out.println("paramline"+parambean.getParamLine());
+                return parambean;
+                //keynum++;
+                //parambean.setKeyNum(keynum);
+            }*/
             else if(!code.contains("for")&&code.toUpperCase().contains(parameterType.toString())&&code.contains("(")&&code.contains(")")) {										//함수선언일경우
                 System.out.println("함수케이스 들어가버렷스");
                 MethodBean methodbean = new MethodBean();
@@ -106,16 +116,21 @@ public class Service_Impl implements MainService{
             
         }
         
-//-----------------------for------------------------------        
-        if(code.contains("for")) {
-			System.out.println("for문 들어갔습니다");
-			ForBean forbean =new ForBean();
-			
-			forbean = codebuffer.case_forLoop(lineNumber, code, splitcode);
-			System.out.println("lineNumber: "+lineNumber+"code: "+code);
-			
-			return forbean;
-		}
+//-----------------------for------------------------------
+        
+        for(ControlStatement controlstatement : ControlStatement.values()) {
+            if(code.toUpperCase().contains(controlstatement.toString())) {     
+                System.out.println("for문 들어갔습니다");
+                ForBean forbean =new ForBean();
+                
+                forbean = codebuffer.case_forLoop(lineNumber, code, splitcode);
+                System.out.println("lineNumber: "+lineNumber+"code: "+code);
+                
+                return forbean;
+            }
+
+       
+		
 //-----------------------for------------------------------      
         if(isvalue != 0) {
             System.out.println(isvalue);
@@ -124,13 +139,17 @@ public class Service_Impl implements MainService{
             tempvalue[1] = tempvalue[1].replaceAll(" ","");
             corebuffer.getParam().get("p"+isvalue+"line").setParamValue(tempvalue[1].replaceAll(";", ""));
         }
+  /*      
+        if(povalue != 0) {
+            System.out.println("POVALUE"+povalue);
+            System.out.println("라인넘버가 몇임?"+lineNumber);
+            System.out.println(corebuffer.getParam().get("p"+lineNumber+"line"));
+            corebuffer.getParam().get("p"+lineNumber+"line").setParamValue(corebuffer.getParam().get("p"+povalue+"line").getParamValue());
+            return parambean;
+        }*/
 
 
-        for(ControlStatement controlstatement : ControlStatement.values()) {
-            if(code.toUpperCase().contains(controlstatement.toString())) {
-                System.out.println("for문");
-            }
-
+        
 
         }
      
@@ -156,7 +175,6 @@ public class Service_Impl implements MainService{
             Object obj = new Object();
             //	System.out.println(hashmap.get(i+"line"));
 
-
             keynum++;
             obj = lineRead(i,splitcode.get(i+"line"),splitcode,corebuffer,keynum);//리턴타입 오브젝트
             //변수 같은거 있나없나 비교할려면 코어버퍼 줘야하나? 시발
@@ -169,6 +187,24 @@ public class Service_Impl implements MainService{
                 ParamBean pb = new ParamBean();
                 pb = (ParamBean)obj;
                 corebuffer.setParam(j+"line",pb);
+              /*  int rrr = 1;
+                if(corebuffer.getParam().get("p"+rrr+"line").getParamValue()!=null&&corebuffer.getParam().get("p"+j+"line").getParamName().contains("*")) {
+                   int k = pointerNameSearch(corebuffer, splitcode.get(j+"line"));
+                   System.onmjhut.println("k의값이다ㅁㄴㅇㅁㅇㅁㄴㅇㄴㅁㅇ"+k);
+                    if(k != 0) {
+                        System.out.println("POVALUE"+k);
+                        System.out.println("라인넘버가 몇임?"+k);
+                        System.out.println(corebuffer.getParam().get("p"+k+"line"));
+                        if(corebuffer.getParam().get("p"+k+"line").getParamValue() == null) {
+                            System.out.println("널이므로 이쪽으로 들어온다!!!");
+                            corebuffer.getParam().get("p"+j+"line").setParamValue("null");
+                        }
+                        else {
+                        corebuffer.getParam().get("p"+j+"line").setParamValue(corebuffer.getParam().get("p"+k+"line").getParamValue());
+                        }
+                    }*/
+             
+            
                 System.out.println("같냐안간나");
                 j++;
             }else if(obj instanceof ForBean) {
@@ -176,6 +212,20 @@ public class Service_Impl implements MainService{
             	fb=(ForBean)obj;
             	//--------여기서부터 ----------
             	
+            }
+          
+            //System.out.println("비었나안비었나"+corebuffer.getParam().isEmpty());
+            
+
+            for(int po = 1 ; po <= corebuffer.getParam().size(); po++) {
+                System.out.println("p아이line=    "+"p"+po+"line");
+            if(corebuffer.getParam().get("p"+po+"line").getParamName().contains("*")) {
+                System.out.println("포인터 들어옴옴옴");
+                System.out.println(po+"의 값들이다."+corebuffer.getParam().get("p"+po+"line").getParamName());
+                int resserch = pointerNameSearch(corebuffer, corebuffer.getParam().get("p"+po+"line").getParamValue());
+                System.out.println("resserch"+resserch);
+                corebuffer.getParam().get("p"+po+"line").setParamValue(corebuffer.getParam().get("p"+resserch+"line").getParamValue());
+            }
             }
             
         }
@@ -186,6 +236,7 @@ public class Service_Impl implements MainService{
     @Override
     public int nameSearch(CoreBuffer corebuffer,String code) {
         String[] key = code.split("=");
+        System.out.println("키!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+key[0]);
         key[0]=key[0].replaceAll(" ", "");
         int i;
         for(i = 1; i<=corebuffer.getParam().size();i++) {
@@ -197,4 +248,30 @@ public class Service_Impl implements MainService{
         }
         return 0;
     }
+    
+    @Override
+    public int pointerNameSearch(CoreBuffer coreBuffer, String code) {
+        System.out.println("코드코드" +  code);
+      //  String[] key = code.split("=");
+        
+       // key[1]=key[1].replaceAll(" ", "");
+       // key[1]=key[1].replaceAll(";", "");
+        System.out.println("key[1]@#@!#!#@!#@!#@!#!#asd!@#@!"+code);
+        if(!code.contains("&")) {
+            System.out.println("&이 없네");
+            return 0;
+        }
+        String res = code.replace("&","");
+        System.out.println("RESSSSSSSSSSSSSSSSSSSSSS"+res);
+        int i;
+        for(i= 1; i<=coreBuffer.getParam().size(); i++) {
+            if(res.equals(coreBuffer.getParam().get("p"+i+"line").getParamName())) {
+                System.out.println("아이의 값이다!!!!!!"+i);
+                return i;
+            }
+        }
+        return 0;
+        
+    }
+    
 }

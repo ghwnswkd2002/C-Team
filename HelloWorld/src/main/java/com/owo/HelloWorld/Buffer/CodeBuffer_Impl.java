@@ -66,12 +66,17 @@ public class CodeBuffer_Impl implements CodeBuffer{
 				//enum 안에 있는 String과 split한 배열 첫번째랑 같은게 있는지 확인
 				//근데 초깃값 설정 되어 있음
 				//EX. int a = 40;
+				String res = "";
 				param.setParamType(dev[0]);
-				System.out.println("setParamType============dev[0]에 넣음");
-				String[] temp = dev[1].split("=");//=을 기준을 다시 자른다
+				System.out.println("setParamType============dev[0]에 넣음"+dev[0]);
+				for(int a = 1; a<dev.length; a++) {
+				    res += dev[a];
+				}
+				System.out.println("res"+res);
+				String[] temp = res.replaceAll(" ","").split("=");//=을 기준을 다시 자른다
 				System.out.println("dev[1] "+dev[1]);
 				System.out.println("temp0  "+temp[0]);
-				System.out.println("temp1  "+temp[1]);
+				System.out.println("temp1  "+temp[1].replaceAll(" ", ""));
 				System.out.println("=기준 자름");
 				param.setParamName(temp[0]);
 				System.out.println("temp[0]에 넣음");
@@ -93,6 +98,28 @@ public class CodeBuffer_Impl implements CodeBuffer{
 
 			}
 			//포인터인 경우
+			else if(line.contains("*")) {
+			    String ConLine = line.replaceAll(" ", "");
+			    System.out.println("포인터 라인 붙이기"+ConLine);
+			    if(ConLine.contains(parameterType.toString().toLowerCase())&&ConLine.contains("=")) {
+			            System.out.println("================ 이꼴이꼴이꼴 이 있어서 여기로 옴===============");
+			            String[] poValue = ConLine.split("=");
+			            System.out.println("Pointer Value @@@@@@@@@@@@@  = "+poValue[1]);
+			            String RValue = poValue[1].replaceAll(";", "");
+			            String PNValue = poValue[0].replaceAll(parameterType.toString().toLowerCase(), "");
+			            param.setParamType(parameterType.toString().toLowerCase());
+			            param.setParamName(PNValue);
+			            
+			            System.out.println("PNValue@@@@@@@@@"+PNValue);
+			            param.setParamLine(String.valueOf(lineNumber));
+			            System.out.println("LINENUMBERRRRRRRRRRRRRRRRRRRRR"+lineNumber);
+			    }
+			    else if (ConLine.contains(parameterType.toString().toLowerCase())&&!ConLine.contains("=")) {
+			      System.out.println("이꼴이없엉!!! 어디로갔나");  
+			    }
+			    }
+			    
+			
 		}
 
 
