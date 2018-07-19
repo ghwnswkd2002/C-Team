@@ -66,7 +66,7 @@ public class Service_Impl implements MainService{
 
       //  int povalue = pointerNameSearch(corebuffer, code);
 //System.out.println("POVALUEEEEEEEEEEEEEEEEE"+povalue);
-        int isvalue = nameSearch(corebuffer, code);
+        int isvalue = codebuffer.nameSearch(corebuffer, code);
         System.out.println(lineNumber);
         System.out.println("이거뭔ㄷㅔ"+isvalue);
         
@@ -75,7 +75,7 @@ public class Service_Impl implements MainService{
             System.out.println("파라미터타입 = "+parameterType.toString());
             if(code.toUpperCase().contains(parameterType.toString())&&!code.contains("(")) {			//변수선언일경우
                 System.out.println("int 드르가");
-                parambean = codebuffer.case_VariableDeclaration(lineNumber,code);
+                parambean = codebuffer.case_VariableDeclaration(lineNumber,code,splitcode,corebuffer);
                 System.out.println("paramname"+parambean.getParamName());
                 System.out.println("paramline"+parambean.getParamLine());
                 //keynum++;
@@ -187,23 +187,6 @@ public class Service_Impl implements MainService{
                 ParamBean pb = new ParamBean();
                 pb = (ParamBean)obj;
                 corebuffer.setParam(j+"line",pb);
-              /*  int rrr = 1;
-                if(corebuffer.getParam().get("p"+rrr+"line").getParamValue()!=null&&corebuffer.getParam().get("p"+j+"line").getParamName().contains("*")) {
-                   int k = pointerNameSearch(corebuffer, splitcode.get(j+"line"));
-                   System.onmjhut.println("k의값이다ㅁㄴㅇㅁㅇㅁㄴㅇㄴㅁㅇ"+k);
-                    if(k != 0) {
-                        System.out.println("POVALUE"+k);
-                        System.out.println("라인넘버가 몇임?"+k);
-                        System.out.println(corebuffer.getParam().get("p"+k+"line"));
-                        if(corebuffer.getParam().get("p"+k+"line").getParamValue() == null) {
-                            System.out.println("널이므로 이쪽으로 들어온다!!!");
-                            corebuffer.getParam().get("p"+j+"line").setParamValue("null");
-                        }
-                        else {
-                        corebuffer.getParam().get("p"+j+"line").setParamValue(corebuffer.getParam().get("p"+k+"line").getParamValue());
-                        }
-                    }*/
-             
             
                 System.out.println("같냐안간나");
                 j++;
@@ -216,8 +199,7 @@ public class Service_Impl implements MainService{
           
             //System.out.println("비었나안비었나"+corebuffer.getParam().isEmpty());
             
-
-            for(int po = 1 ; po <= corebuffer.getParam().size(); po++) {
+            /*for(int po = 1 ; po <= corebuffer.getParam().size(); po++) {
                 System.out.println("p아이line=    "+"p"+po+"line");
             if(corebuffer.getParam().get("p"+po+"line").getParamName().contains("*")) {
                 System.out.println("포인터 들어옴옴옴");
@@ -226,28 +208,14 @@ public class Service_Impl implements MainService{
                 System.out.println("resserch"+resserch);
                 corebuffer.getParam().get("p"+po+"line").setParamValue(corebuffer.getParam().get("p"+resserch+"line").getParamValue());
             }
-            }
+            }*/
             
         }
                             
         return corebuffer;  
     }
 
-    @Override
-    public int nameSearch(CoreBuffer corebuffer,String code) {
-        String[] key = code.split("=");
-        System.out.println("키!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+key[0]);
-        key[0]=key[0].replaceAll(" ", "");
-        int i;
-        for(i = 1; i<=corebuffer.getParam().size();i++) {
-            if(key[0].equals(corebuffer.getParam().get("p"+i+"line").getParamName())){
-                return i;
-            }
-
-
-        }
-        return 0;
-    }
+    
     
     @Override
     public int pointerNameSearch(CoreBuffer coreBuffer, String code) {

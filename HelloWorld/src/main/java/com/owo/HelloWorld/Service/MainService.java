@@ -18,8 +18,6 @@ public interface MainService {
 	
 	public Object lineRead(int lineNumber,String code,HashMap<String, String> splitcode,CoreBuffer corebuffer, int keynum);
 	// 라인별로 들어온 String을 잘라서 분석하는 함수
-	
-	public int nameSearch(CoreBuffer corebuffer,String code) ;
 
     public int pointerNameSearch(CoreBuffer coreBuffer, String code);
 	

@@ -8,7 +8,7 @@ import com.owo.HelloWorld.Buffer.Bean.ParamBean;
 
 public interface CodeBuffer {
 	
-	public ParamBean case_VariableDeclaration(int lineNumber,String line); 
+	public ParamBean case_VariableDeclaration(int lineNumber,String line,HashMap<String,String> splitcode,CoreBuffer corebuffer); 
 	//변수선언과 관련된 함수
 	
 	public MethodBean case_functionDefine(int lineNumber,String line,HashMap<String,String> splitcode);
@@ -27,6 +27,8 @@ public interface CodeBuffer {
 	public ForBean Iterators();
 	//반복문
 	public ForBean case_forLoop (int lineNumber,String line,HashMap<String,String> splitcode); //for문
+
+    public int nameSearch(CoreBuffer corebuffer, String code);
 
 	
 }
