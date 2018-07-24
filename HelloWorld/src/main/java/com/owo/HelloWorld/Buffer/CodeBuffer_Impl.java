@@ -98,7 +98,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
                 System.out.println("포인터 라인 붙이기"+ConLine);
                 System.out.println("변수타입"+parameterType.toString().toLowerCase());
 
-                if(ConLine.contains("=")) {
+                if(ConLine.contains("=")&&ConLine.contains(parameterType.toString().toLowerCase())) {
                     System.out.println("================ 이꼴이꼴이꼴 이 있어서 여기로 옴===============");
                     String[] poValue = ConLine.split("=");
                     System.out.println("Pointer Value @@@@@@@@@@@@@  = "+poValue[1]);
@@ -114,6 +114,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
                     //미리 선언된 a값이 어떤 값인지 알아내는 함수를 만들면 된다.
                     int pointing = nameSearch(corebuffer, line);
                     System.out.println("찌그본다"+corebuffer.getParam().get("p"+pointing+"line").getParamValue());
+                    param.setParamValue(corebuffer.getParam().get("p"+pointing+"line").getParamName());
                     param.setPointValue(corebuffer.getParam().get("p"+pointing+"line").getParamValue());
                     //변수가 포인터인경우 포인터 전용 변수에다가 값을 넣어줌
 
@@ -271,8 +272,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
                         System.out.println(splittemp);
 
                         //splittemp[0]
-
-                        /*switch(str) {
+                        /*switch(str) 
 						case "+" :splittemp[0]
 						case "-" :
 						case "*" :
