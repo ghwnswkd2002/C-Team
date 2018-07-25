@@ -16,8 +16,15 @@ public class CoreBuffer {
 	HashMap<String,Object> method = new HashMap<String,Object>();		//함수 선언
 	HashMap<String,Object> controlStatement = new HashMap<String,Object>();//제어문 정보
 	HashMap<String,Object> allLine = new HashMap<String,Object>();//라인 통째로 해쉬맵에 저장
+	HashMap<String,String> allOfLine = new HashMap<String,String>();
 	
-	
+	public HashMap<String, String> getAllOfLine() {
+		return allOfLine;
+	}
+	public void setAllOfLine(String key,String value) {
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~랄랄라");
+		allOfLine.put(key, value);
+	}
     public HashMap<String, ParamBean> getParam() {
 		return param;
 	}

@@ -57,10 +57,14 @@ public class CodeBuffer_Impl implements CodeBuffer{
                 //근데 초깃값 설정안되어 있는 경우
                 //EX. int a;
                 //toUpperCase() 이거는 소문자를 대문자로 바꾸는 함수
+                
                 System.out.println(dev[0]+"이거 넣을게 초기화 안해도대는거야 ");
                 param.setParamType(dev[0]);
                 param.setParamName(dev[1].replaceAll(";",""));
-
+                System.out.println("올라인 가기전");
+                corebuffer.setAllOfLine(lineNumber+"line","p"+1+"line");
+                System.out.println("올라인 갔다옴.");
+                
             } else if(!line.contains("*")&&dev[0].toUpperCase().equals(parameterType.toString())&&line.contains("=")) {
                 System.out.println("else if문");
                 //enum 안에 있는 String과 split한 배열 첫번째랑 같은게 있는지 확인
@@ -124,7 +128,7 @@ public class CodeBuffer_Impl implements CodeBuffer{
                     System.out.println("이꼴이없엉!!! 어디로갔나");  
                     //포인터가 이퀄없을때 
                     //String linepp = line.replaceAll(" ", "");
-                  //  System.out.println("^^^^^^^^^^^^^^^^^^^^^^^"+linepp);
+                    //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^"+linepp);
                     String[] lineppp = line.split(" ");
                     
                     for(int i=1;i<lineppp.length;i++) {

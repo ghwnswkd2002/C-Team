@@ -2308,8 +2308,16 @@
 		display: inline;
 		position: relative;
 		/* float:left; */
-		/* overflow:hidden; */
+		overflow:auto;
+		
 	}
+	
+	.half canvas{
+		overflow: hidden;
+		width:800px;
+		height:800px;
+	}
+
 
 		.half img {
 			display: inline;
@@ -2682,7 +2690,7 @@
 		}
 
 			.wrapper.style1 input, .wrapper.style1 select, .wrapper.style1 textarea {
-				color: #1abc9c;
+				color: #000000;
 			}
 
 			.wrapper.style1 a {
@@ -3822,7 +3830,7 @@
 		}
 
 			.post.style1 input, .post.style1 select, .post.style1 textarea {
-				color: #1abc9c;
+				color: #000000;
 			}
 
 			.post.style1 a {
@@ -4257,7 +4265,7 @@
 						}
 
 				.post.style2.invert .half {
-					background-color: #3498db;
+					background-color: #000000;
 				}
 
 		.post.style3 {

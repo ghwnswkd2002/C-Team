@@ -25,13 +25,13 @@ public class MainController {
 	@RequestMapping("/")
 	public String main() {
 		System.out.println("main");
-		return "codeAndCanvas";
+		return "main";
 	}
 	
-	@RequestMapping("/test")
+	@RequestMapping("/balltest")
 	public String test() {
 		System.out.println("test");
-		return "test";
+		return "balltest";
 	}
 	
 	
