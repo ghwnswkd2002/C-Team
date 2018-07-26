@@ -53,10 +53,10 @@
 
                     if (lineInfo.indexOf('p')==0) {
                         //"p"+i+"line"
-                        //파람키를 넘겨쥼 그기로 가세여
+                        //파람키를 넘겨쥼 그기로 가++++++++++++++세여
                         console.log("p있어서 들어옴")
                         var all_param = all_data.keys["param"];
-	console.log(all_param);
+						console.log(all_param);
                         var key = all_param;
                         //여기다가 함수를 만들어서 거기서 처리하게 만들어죠
                         //canvas로 통하는 거만듦녀댄당;
@@ -67,6 +67,7 @@
                     } 
                 }
             }
+            
          })
       }
    }

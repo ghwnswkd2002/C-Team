@@ -81,7 +81,7 @@ $(function() {
                       //여기다가 함수를 만들어서 거기서 처리하게 만들어죠
                       //canvas로 통하는 거만듦녀댄당;
                       console.log(key);
-                      paramDraw(key["p"+key_name]);
+                      var param1 = paramDraw(key["p"+key_name]);
                       //key는 object형식으로 전달됨
 
                   } 
@@ -149,7 +149,7 @@ $(function() {
 	<!-- Nav -->
 	<nav id="menu">
 	<ul class="links">
-		<li><a href="/balltest">balltest</a></li>
+		<li><a href="./balltest">balltest</a></li>
 		<li><a href="generic.html">Generic</a></li>
 		<li><a href="elements.html">Elements</a></li>
 	</ul>
